@@ -1,0 +1,2 @@
+# dotclaude
+クロスデバイス用ClaudeCodeユーザースコープ設定ファイル
