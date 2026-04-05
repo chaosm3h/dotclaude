@@ -2,11 +2,21 @@
 DOTFILES="$PWD/.claude"
 TARGET="$HOME/.claude"
 
+# ターゲットディレクトリを作成（存在しない場合）
 mkdir -p "$TARGET"
 
-# symlinkを張る（既存ファイルは上書き）
-ln -sf "$DOTFILES/settings.json"  "$TARGET/settings.json"
-ln -sf "$DOTFILES/CLAUDE.md"      "$TARGET/CLAUDE.md"
-ln -sf "$DOTFILES/agents"         "$TARGET/agents"
-ln -sf "$DOTFILES/skills"         "$TARGET/skills"
-ln -sf "$DOTFILES/rules"          "$TARGET/rules"
+# 既存のターゲット（シンボリックリンク予定のパス）があれば削除し、シンボリックリンクを張る
+ITEMS=("settings.json" "CLAUDE.md" "agents" "hooks" "rules" "skills")
+for item in "${ITEMS[@]}"; do
+    if [ -e "$TARGET/$item" ] || [ -L "$TARGET/$item" ]; then
+      rm -rf "${TARGET:?}/$item"
+    fi
+    ln -sf "$DOTFILES/$item" "$TARGET/$item"
+done
+
+# シンボリックリンクのみを確認
+for item in "${ITEMS[@]}"; do
+    if [ -L "$TARGET/$item" ]; then
+        echo "$TARGET/$item -> $(readlink "$TARGET/$item")"
+    fi
+done
