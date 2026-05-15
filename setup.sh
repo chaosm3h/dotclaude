@@ -6,7 +6,7 @@ TARGET="$HOME/.claude"
 mkdir -p "$TARGET"
 
 # 既存のターゲット（シンボリックリンク予定のパス）があれば削除し、シンボリックリンクを張る
-ITEMS=("settings.json" "CLAUDE.md" "agents" "hooks" "rules" "skills")
+ITEMS=("settings.json" "CLAUDE.md" "agents" "hooks" "rules" "skills" "statusline.py")
 for item in "${ITEMS[@]}"; do
     if [ -e "$TARGET/$item" ] || [ -L "$TARGET/$item" ]; then
       rm -rf "${TARGET:?}/$item"
