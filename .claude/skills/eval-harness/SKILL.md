@@ -1,3 +1,8 @@
+---
+name: eval-harness
+description: Eval駆動開発(EDD)のフレームワーク。capability/regression evalを定義・実行・レポート化し、pass@kとpass^kメトリクスで信頼性を測定。「eval」「eval-driven」「evaluation harness」をトリガとする。
+---
+
 # Eval Harness Skill
 
 Claude Codeセッション用の正式な評価フレームワークで、eval駆動開発 (EDD) の原則を実装しています。
@@ -219,3 +224,14 @@ Capability: 5/5 passed (pass@3: 100%)
 Regression: 3/3 passed (pass^3: 100%)
 Status: SHIP IT
 ```
+
+## Sub-command Usage
+
+呼び出し方:
+
+- `define <feature-name>` - `.claude/evals/<feature-name>.md` にテンプレで eval 定義を作成し、ユーザーに具体的な基準を入力させる
+- `check <feature-name>` - 定義を読み込み、各 eval を実行して PASS/FAIL を `.claude/evals/<feature-name>.log` に記録、現在状態をレポート
+- `report <feature-name>` - capability/regression それぞれの結果、pass@1/pass@3/pass^3 などのメトリクス、NOTES、RECOMMENDATION (SHIP/NEEDS WORK/BLOCKED) を含む完全レポート生成
+- `list` - 全 eval 定義を `[X/Y passing] STATUS` 形式で一覧
+- `clean` - 古い eval ログを削除 (最新10件保持)
+

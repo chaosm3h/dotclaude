@@ -1,3 +1,8 @@
+---
+name: verification-loop
+description: コードベース状態の包括的な検証を実行。ビルド/型/Lint/テスト/カバレッジ/秘密情報/console.log/Git diff を順次チェックし、PR準備可否を判定。「verify」「pre-commit check」「pre-pr check」などをトリガとする。
+---
+
 # Verification Loop Skill
 
 Claude Codeセッション用の包括的な検証システム。
@@ -118,3 +123,30 @@ Issues to Fix:
 
 このスキルは PostToolUse hooks を補完しますが、より深い検証を提供します。
 Hooksは問題を即座にキャッチし、このスキルは包括的なレビューを提供します。
+
+## Arguments
+
+呼び出し時のモード指定 (省略時は `full`):
+
+- `quick` - ビルド + 型チェックのみ (高速)
+- `full` - 全てのチェック (デフォルト)
+- `pre-commit` - コミットに関連するチェック (型/Lint/秘密情報)
+- `pre-pr` - 完全なチェック + セキュリティスキャン
+
+## Concise Output
+
+簡潔レポートが望ましい場合:
+
+```
+VERIFICATION: [PASS/FAIL]
+
+Build:    [OK/FAIL]
+Types:    [OK/X errors]
+Lint:     [OK/X issues]
+Tests:    [X/Y passed, Z% coverage]
+Secrets:  [OK/X found]
+Logs:     [OK/X console.logs]
+
+Ready for PR: [YES/NO]
+```
+

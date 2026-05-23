@@ -136,6 +136,40 @@ Rules:
 - E2Eテストが重要なユーザーフローをカバー
 - テストが本番前にバグを検出
 
+## Test Types to Include
+
+**Unit Tests** (関数レベル):
+- ハッピーパスシナリオ
+- エッジケース (空、null、最大値)
+- エラー条件
+- 境界値
+
+**Integration Tests** (コンポーネントレベル):
+- APIエンドポイント
+- データベース操作
+- 外部サービス呼び出し
+- Reactコンポーネントとhooks
+
+**E2E Tests** (`e2e-runner` agent を推奨):
+- 重要なユーザーフロー
+- 複数ステップのプロセス
+- フルスタック統合
+
+## Coverage Requirements
+
+- すべてのコードで**最低80%**
+- **100%必須**の対象:
+  - 財務計算
+  - 認証ロジック
+  - セキュリティ重要なコード
+  - コアビジネスロジック
+
+## Related Agents / Skills
+
+- 実行は `tdd-guide` agent (`~/.claude/agents/tdd-guide.md`) を Task ツールで起動
+- 計画策定は `planner` agent、レビューは `code-reviewer` agent と連携
+- カバレッジ分析は `test-coverage` skill、検証は `verification-loop` skill
+
 ---
 
 **覚えておいてください**: テストはオプションではありません。テストは自信を持ったリファクタリング、迅速な開発、本番環境の信頼性を可能にするセーフティネットです。

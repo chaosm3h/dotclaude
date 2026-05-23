@@ -77,4 +77,5 @@ Claude Codeセッションの終了時に自動的に評価し、学習済みス
 ## Related
 
 - [The Longform Guide](https://x.com/affaanmustafa/status/2014040193557471352) - 継続学習のセクション
-- `/learn` コマンド - セッション中の手動パターン抽出
+- `learn` skill - セッション中の手動パターン抽出
+
