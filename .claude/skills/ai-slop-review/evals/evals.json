@@ -1,0 +1,52 @@
+{
+  "skill_name": "ai-slop-review",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "heavy-ts-slop-roast",
+      "prompt": "この user_service.ts、Cursorに書かせたやつなんだけど、なんかAIスロップ臭がすごい気がする。何がダメなのか徹底的にダメ出しして。レビュー結果はmarkdownファイルで出して。",
+      "expected_output": "致命傷(ハードコードされたAPIキー、エラー握りつぶし、サイレントフォールバック、無言スタブ)と重傷(any乱用、3連コピペ関数、教科書口調コメント)をfile:line付きで引用し、修正案とスロップスコアを含む辛口レビューレポート",
+      "files": ["fixtures/user_service.ts"],
+      "assertions": [
+        "ハードコードされたAPIキー(API_KEY)をセキュリティ上の致命的問題として指摘している",
+        "catchでエラーを握りつぶしてnull/空配列を返すサイレントフォールバックを指摘している",
+        "getUserById/getUserByEmail/getUserByNameのコピペ重複を指摘している",
+        "any型の乱用を指摘している",
+        "コメントアウトされたupdateUserまたは未実装のdeleteUserスタブを指摘している",
+        "行番号(またはfile:line)付きの指摘が5件以上ある",
+        "主要な指摘に具体的な修正案が添えられている",
+        "引用されたコードが実ファイルに実在し、捏造された指摘がない",
+        "スロップスコアまたは総合判定が明示されている"
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "python-slop-review",
+      "prompt": "data_processor.py をレビューしてほしい。AIに書かせたコードでそのまま使っていいか不安。問題点を遠慮なく指摘して、結果をmarkdownファイルにまとめて。",
+      "expected_output": "bare except + pass、except Exceptionで空dict返却、process_data/process_data_v2の重複、print残骸、実況中継コメント、マジックナンバー1.08などをfile:line付きで指摘した辛口レビューレポート",
+      "files": ["fixtures/data_processor.py"],
+      "assertions": [
+        "save_resultsのbare except + pass(エラー完全握りつぶし)を致命的問題として指摘している",
+        "load_dataの例外時に空dictを返すサイレントフォールバックを指摘している",
+        "process_dataとprocess_data_v2のほぼ完全な重複を指摘している",
+        "print文のデバッグ残骸を指摘している",
+        "1.08のマジックナンバーを指摘している",
+        "行番号(またはfile:line)付きの指摘が5件以上ある",
+        "主要な指摘に具体的な修正案が添えられている",
+        "スロップスコアまたは総合判定が明示されている"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "clean-code-no-false-positives",
+      "prompt": "config_loader.ts にAIスロップっぽいところがないかチェックして。結果はmarkdownファイルで。",
+      "expected_output": "クリーンなコードに対して問題を捏造せず、スロップ感なし(低スコア)と正直に判定するレポート",
+      "files": ["fixtures/config_loader.ts"],
+      "assertions": [
+        "存在しない問題を捏造していない(実在しないコードへの指摘や無理やりの難癖がない)",
+        "コードがクリーン(スロップ感なし)であることを明言している",
+        "スコアや判定を出す場合、低スコア(概ね20以下)または同等の低リスク判定になっている"
+      ]
+    }
+  ]
+}

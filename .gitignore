@@ -1,2 +1,6 @@
 # マシン固有のローカル設定
 .claude/settings.local.json
+.DS_Store
+
+# スキル評価用の作業ディレクトリ(成果物ではない)
+.claude/skills/*-workspace/

@@ -97,6 +97,7 @@ cd dotclaude
 
 | スキル | 内容 | 種別 |
 |---|---|---|
+| `ai-slop-review` | AI生成特有の低品質コード(スロップ)検出と根拠付き辛口ダメ出しレビュー | ガイド |
 | `backend-patterns` | Node.js・Express・Next.js APIパターン | ガイド |
 | `build-fix` | TypeScript/ビルドエラーを段階的修正 (`build-error-resolver` ラッパー) | Agent委任 |
 | `checkpoint` | ワークフロー中のチェックポイント作成・検証・一覧 | ツール |
@@ -110,8 +111,10 @@ cd dotclaude
 | `eval` | eval駆動開発 (define/check/report/list/clean) | ツール |
 | `eval-harness` | Eval駆動開発ハーネス | ツール |
 | `frontend-patterns` | フロントエンドアーキテクチャパターン | ガイド |
+| `goland-clean` | GoLandインスペクションアラートゼロのGoコード実装・自動検証 | ガイド |
 | `grill-me` | コードレビュー練習 | ガイド |
 | `improve-codebase-architecture` | アーキテクチャ改善分析 | ガイド |
+| `japanese-tech-writing` | 日本語の技術文書・書籍原稿の文章規範 | ガイド |
 | `learn` | セッション中の手動パターン抽出 → `~/.claude/skills/learned/` 保存 | ツール |
 | `orchestrate` | feature/bugfix/refactor/security のマルチエージェントワークフロー | オーケストレーション |
 | `plan` | 要件再記述・リスク評価・段階計画 (`planner` ラッパー) | Agent委任 |
