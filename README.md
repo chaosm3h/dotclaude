@@ -66,70 +66,111 @@ cd dotclaude
 
 ## 含まれるコンテンツ
 
-### エージェント (`agents/`)
+エージェント・ルール・スキルは互いに依存するため(例: `tdd-guide`↔`tdd`、`planner`↔`plan`、`code-reviewer`↔`code-review`)、種別ではなく**関係するコンテキスト単位**でまとめています。`モジュール` 列がその項目の種別(エージェント / スキル / ルール)を示します。
 
-| エージェント | 目的 |
-|---|---|
-| `architect` | システム設計・アーキテクチャ決定 |
-| `build-error-resolver` | ビルド・TypeScriptエラー解決 |
-| `code-reviewer` | 品質・セキュリティのコードレビュー |
-| `doc-updater` | ドキュメント更新 |
-| `e2e-runner` | Playwright E2Eテスト |
-| `planner` | 機能実装計画 |
-| `refactor-cleaner` | デッドコードのクリーンアップ |
-| `security-reviewer` | セキュリティ脆弱性分析 |
-| `tdd-guide` | テスト駆動開発 |
+### 計画・アーキテクチャ設計
 
-### ルール (`rules/`)
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| エージェント | `planner` | 機能実装計画 | ECC |
+| スキル | `plan` | 要件再記述・リスク評価・段階計画 (`planner` ラッパー) | ECC |
+| エージェント | `architect` | システム設計・アーキテクチャ決定 | ECC |
+| スキル | `improve-codebase-architecture` | アーキテクチャ改善分析・浅いモジュールの深化 | 独自 |
+| スキル | `grill-me` | 計画・設計をユーザーに徹底質問しストレステスト | 独自 |
+| スキル | `orchestrate` | feature/bugfix/refactor/security のマルチエージェントワークフロー | 独自 |
 
-| ルールファイル | 内容 |
-|---|---|
-| `agents.md` | エージェントオーケストレーション |
-| `coding-style.md` | イミュータビリティ・ファイル構成・エラーハンドリング |
-| `git-workflow.md` | コミット形式・PRワークフロー |
-| `hooks.md` | フックの種類と設定 |
-| `patterns.md` | APIレスポンス・リポジトリパターン |
-| `performance.md` | モデル選択・コンテキスト管理 |
-| `security.md` | セキュリティチェック・秘密情報管理 |
-| `testing.md` | TDDワークフロー・80%カバレッジ要件 |
+### コードレビュー・品質
 
-### スキル (`skills/`)
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| エージェント | `code-reviewer` | 品質・セキュリティのコードレビュー | ECC |
+| スキル | `code-review` | 品質+セキュリティの包括レビュー (`code-reviewer` ラッパー) | ECC |
+| スキル | `ai-slop-review` | AI生成特有の低品質コード(スロップ)検出と根拠付き辛口ダメ出しレビュー | 独自 |
+| スキル | `coding-standards` | TypeScript・JavaScript・React・Node.js のユニバーサルなコーディング規約 | ECC |
+| ルール | `coding-style.md` | イミュータビリティ・ファイル構成・エラーハンドリング | ECC |
+| ルール | `patterns.md` | APIレスポンス・リポジトリパターン | ECC |
 
-| スキル | 内容 | 種別 |
-|---|---|---|
-| `ai-slop-review` | AI生成特有の低品質コード(スロップ)検出と根拠付き辛口ダメ出しレビュー | ガイド |
-| `backend-patterns` | Node.js・Express・Next.js APIパターン | ガイド |
-| `build-fix` | TypeScript/ビルドエラーを段階的修正 (`build-error-resolver` ラッパー) | Agent委任 |
-| `checkpoint` | ワークフロー中のチェックポイント作成・検証・一覧 | ツール |
-| `clickhouse-io` | ClickHouseクエリ最適化・分析 | ガイド |
-| `code-review` | 品質+セキュリティの包括レビュー (`code-reviewer` ラッパー) | Agent委任 |
-| `coding-standards` | TypeScript・JavaScript・React規約 | ガイド |
-| `continuous-learning` | 継続的学習 (Stop hook による自動パターン抽出) | hook |
-| `drawio` | draw.io図の作成 | ガイド |
-| `e2e` | Playwrightでend-to-endテスト生成・実行 (`e2e-runner` ラッパー) | Agent委任 |
-| `effective-go` | Goのベストプラクティス | ガイド |
-| `eval` | eval駆動開発 (define/check/report/list/clean) | ツール |
-| `eval-harness` | Eval駆動開発ハーネス | ツール |
-| `frontend-patterns` | フロントエンドアーキテクチャパターン | ガイド |
-| `goland-clean` | GoLandインスペクションアラートゼロのGoコード実装・自動検証 | ガイド |
-| `grill-me` | コードレビュー練習 | ガイド |
-| `improve-codebase-architecture` | アーキテクチャ改善分析 | ガイド |
-| `japanese-tech-writing` | 日本語の技術文書・書籍原稿の文章規範 | ガイド |
-| `learn` | セッション中の手動パターン抽出 → `~/.claude/skills/learned/` 保存 | ツール |
-| `orchestrate` | feature/bugfix/refactor/security のマルチエージェントワークフロー | オーケストレーション |
-| `plan` | 要件再記述・リスク評価・段階計画 (`planner` ラッパー) | Agent委任 |
-| `prd-to-issues` | PRDからGitHubイシュー生成 | ツール |
-| `project-guidelines-example` | プロジェクトガイドライン例 | ガイド |
-| `refactor-clean` | テスト検証付きデッドコード安全削除 (`refactor-cleaner` ラッパー) | Agent委任 |
-| `security-review` | セキュリティレビュー | ガイド |
-| `setup-pm` | npm/pnpm/yarn/bun 優先パッケージマネージャー設定 | ツール |
-| `slide-commit` | PDFビルド→ステージング→コミット一括実施 | ツール |
-| `strategic-compact` | 戦略的コンパクト | ツール |
-| `tdd` | テスト駆動開発（Red-Green-Refactor） | ガイド |
-| `test-coverage` | カバレッジ分析と不足テスト自動生成 | ツール |
-| `translate2ja` | マークダウンファイルの日本語翻訳 | ツール |
-| `update-codemaps` | architecture/backend/frontend/data コードマップ自動生成 | ツール |
-| `update-docs` | CONTRIB.md/RUNBOOK.md 同期生成 (`doc-updater` ラッパー) | Agent委任 |
-| `verification-loop` | ビルド/型/Lint/テスト/秘密情報検証ループ | ツール |
-| `verify` | コードベース状態の包括検証・PR準備可否判定 | ツール |
-| `write-a-prd` | PRD作成・GitHubイシュー提出 | ツール |
+### セキュリティ
+
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| エージェント | `security-reviewer` | セキュリティ脆弱性分析 | ECC |
+| スキル | `security-review` | 認証・入力処理・APIエンドポイント等のセキュリティチェックリストとパターン | ECC |
+| ルール | `security.md` | セキュリティチェック・秘密情報管理 | ECC |
+
+### テスト・検証
+
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| エージェント | `tdd-guide` | テスト駆動開発 | ECC |
+| スキル | `tdd` | テスト駆動開発（Red-Green-Refactor） | 独自 |
+| ルール | `testing.md` | TDDワークフロー・80%カバレッジ要件 | ECC |
+| エージェント | `e2e-runner` | Playwright E2Eテスト | ECC |
+| スキル | `e2e` | Playwrightでend-to-endテスト生成・実行 (`e2e-runner` ラッパー) | ECC |
+| スキル | `test-coverage` | カバレッジ分析と不足テスト自動生成 | 独自 |
+| スキル | `eval` | eval駆動開発 (define/check/report/list/clean) | 独自 |
+| スキル | `eval-harness` | Eval駆動開発(EDD)ハーネス。pass@k/pass^kで信頼性測定 | ECC |
+| スキル | `verify` | コードベース状態の包括検証・PR準備可否判定 | 独自 |
+| スキル | `verification-loop` | ビルド/型/Lint/テスト/秘密情報/console.log/Git diff を順次検証 | ECC |
+
+### ビルド・型エラー
+
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| エージェント | `build-error-resolver` | ビルド・TypeScriptエラー解決 | ECC |
+| スキル | `build-fix` | TypeScript/ビルドエラーを段階的修正 (`build-error-resolver` ラッパー) | ECC |
+
+### リファクタリング
+
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| エージェント | `refactor-cleaner` | デッドコードのクリーンアップ | ECC |
+| スキル | `refactor-clean` | テスト検証付きデッドコード安全削除 (`refactor-cleaner` ラッパー) | ECC |
+
+### ドキュメント
+
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| エージェント | `doc-updater` | ドキュメント更新 | ECC |
+| スキル | `update-docs` | CONTRIB.md/RUNBOOK.md 同期生成 (`doc-updater` ラッパー) | ECC |
+| スキル | `update-codemaps` | architecture/backend/frontend/data コードマップ自動生成 | 独自 |
+| スキル | `japanese-tech-writing` | 日本語の技術文書・書籍原稿の文章規範 | 独自 |
+| スキル | `translate2ja` | マークダウンファイルの日本語翻訳 | 独自 |
+
+### PRD・イシュー管理
+
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| スキル | `write-a-prd` | PRD作成・GitHubイシュー提出 | 独自 |
+| スキル | `prd-to-issues` | PRDからGitHubイシュー生成 | 独自 |
+
+### 言語・ツール別ガイド
+
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| スキル | `backend-patterns` | Node.js・Express・Next.js APIのバックエンドアーキテクチャパターン | ECC |
+| スキル | `frontend-patterns` | React・Next.js・状態管理・パフォーマンスのフロントエンドパターン | ECC |
+| スキル | `effective-go` | Goのベストプラクティス | 独自 |
+| スキル | `goland-clean` | GoLandインスペクションアラートゼロのGoコード実装・自動検証 | 独自 |
+| スキル | `clickhouse-io` | ClickHouseクエリ最適化・分析 | 独自 |
+| スキル | `drawio` | draw.io図の作成 | 独自 |
+
+### ワークフロー・環境設定
+
+| モジュール | 名前 | 内容 | 由来 |
+|---|---|---|---|
+| ルール | `agents.md` | エージェントオーケストレーション | ECC |
+| ルール | `git-workflow.md` | コミット形式・PRワークフロー | ECC |
+| ルール | `hooks.md` | フックの種類と設定 | ECC |
+| ルール | `performance.md` | モデル選択・コンテキスト管理 | ECC |
+| スキル | `setup-pm` | npm/pnpm/yarn/bun 優先パッケージマネージャー設定 | 独自 |
+| スキル | `slide-commit` | PDFビルド→ステージング→コミット一括実施 | 独自 |
+| スキル | `checkpoint` | ワークフロー中のチェックポイント作成・検証・一覧 | 独自 |
+| スキル | `continuous-learning` | セッションから再利用パターンを自動抽出し学習済みスキルとして保存 (Stop hook) | ECC |
+| スキル | `strategic-compact` | 論理的境界での手動コンパクション提案 | ECC |
+| スキル | `learn` | セッション中の手動パターン抽出 → `~/.claude/skills/learned/` 保存 | 独自 |
+| スキル | `project-guidelines-example` | プロジェクトガイドライン例 | 独自 |
+
+> **由来について**: `ECC` は [affaan-m/ECC](https://github.com/affaan-m/ECC) 由来、`独自` はそれ以外(自作・他ソース)を指します。
+> `モジュール` が `スキル` で `内容` に「(`○○` ラッパー)」とあるもの(`build-fix`, `code-review`, `e2e`, `plan`, `refactor-clean`, `update-docs`)は、スキルファイル自体はECCに存在しませんが、呼び出し先エージェントがすべてECC由来のため `ECC` に分類しています。
+> エージェントとルールは現状すべてECC由来です。
