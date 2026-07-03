@@ -8,7 +8,6 @@
       "Bash(git status)",
       "Bash(git diff *)",
       "Bash(git log *)",
-      "Bash(git commit *)",
       "Bash(ls *)",
       "Bash(cat *)",
       "Bash(grep *)"
@@ -28,17 +27,15 @@
       "Bash(wget *)",
       "Bash(nc *)",
       "Bash(ssh *)",
-      "Bash(git push *)",
       "Read(*.env)",
       "Read(.env.*)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   },
   "enableAllProjectMcpServers": false,
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.py",
-    "padding": 0
-  },
   "hooks": {
     "PreToolUse": [
       {
@@ -54,6 +51,11 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.py",
+    "padding": 0
+  },
   "enabledPlugins": {
     "plugin-dev@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
@@ -66,13 +68,28 @@
     "code-review@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
     "claude-api@anthropic-agent-skills": true,
-    "document-skills@anthropic-agent-skills": true
+    "document-skills@anthropic-agent-skills": true,
+    "github@claude-plugins-official": true,
+    "warp@claude-code-warp": true,
+    "oz-harness-support@claude-code-warp": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
       "source": {
         "source": "git",
         "url": "https://github.com/anthropics/skills.git"
+      }
+    },
+    "claude-code-warp": {
+      "source": {
+        "source": "github",
+        "repo": "warpdotdev/claude-code-warp"
+      }
+    },
+    "ecc": {
+      "source": {
+        "source": "github",
+        "repo": "affaan-m/ECC"
       }
     }
   },
@@ -85,5 +102,7 @@
       ]
     }
   },
-  "editorMode": "normal"
+  "effortLevel": "high",
+  "editorMode": "normal",
+  "autoCompactEnabled": false
 }
