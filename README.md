@@ -76,7 +76,7 @@ cd dotclaude
 | スキル | `plan` | 要件再記述・リスク評価・段階計画 (`planner` ラッパー) | ECC |
 | エージェント | `architect` | システム設計・アーキテクチャ決定 | ECC |
 | スキル | `improve-codebase-architecture` | アーキテクチャ改善分析・浅いモジュールの深化 | 独自 |
-| スキル | `grill-me` | 計画・設計をユーザーに徹底質問しストレステスト | 独自 |
+| スキル | `grilling` | 計画・設計をユーザーに徹底質問しストレステスト | mattpocock |
 | スキル | `orchestrate` | feature/bugfix/refactor/security のマルチエージェントワークフロー | 独自 |
 
 ### コードレビュー・品質
@@ -141,8 +141,8 @@ cd dotclaude
 
 | モジュール | 名前 | 内容 | 由来 |
 |---|---|---|---|
-| スキル | `write-a-prd` | PRD作成・GitHubイシュー提出 | 独自 |
-| スキル | `prd-to-issues` | PRDからGitHubイシュー生成 | 独自 |
+| スキル | `to-prd` | 会話内容をPRD化しイシュートラッカーへ公開(ヒアリングなし) | mattpocock |
+| スキル | `to-issues` | 計画・仕様・PRDをトレーサーバレット垂直スライスでイシュー分割 | mattpocock |
 
 ### 言語・ツール別ガイド
 
@@ -169,8 +169,10 @@ cd dotclaude
 | スキル | `continuous-learning` | セッションから再利用パターンを自動抽出し学習済みスキルとして保存 (Stop hook) | ECC |
 | スキル | `strategic-compact` | 論理的境界での手動コンパクション提案 | ECC |
 | スキル | `learn` | セッション中の手動パターン抽出 → `~/.claude/skills/learned/` 保存 | 独自 |
+| スキル | `handoff` | 現在の会話を別エージェント向け引き継ぎドキュメントにまとめる | mattpocock |
+| スキル | `teach` | ワークスペース内でユーザーに新しいスキル・概念を教える | mattpocock |
 | スキル | `project-guidelines-example` | プロジェクトガイドライン例 | 独自 |
 
-> **由来について**: `ECC` は [affaan-m/ECC](https://github.com/affaan-m/ECC) 由来、`独自` はそれ以外(自作・他ソース)を指します。
+> **由来について**: `ECC` は [affaan-m/ECC](https://github.com/affaan-m/ECC) 由来、`mattpocock` は [mattpocock/skills](https://github.com/mattpocock/skills) 由来、`独自` はそれ以外(自作・他ソース)を指します。
 > `モジュール` が `スキル` で `内容` に「(`○○` ラッパー)」とあるもの(`build-fix`, `code-review`, `e2e`, `plan`, `refactor-clean`, `update-docs`)は、スキルファイル自体はECCに存在しませんが、呼び出し先エージェントがすべてECC由来のため `ECC` に分類しています。
 > エージェントとルールは現状すべてECC由来です。
