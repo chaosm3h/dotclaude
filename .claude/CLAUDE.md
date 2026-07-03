@@ -32,6 +32,7 @@
 | agents.md | エージェントオーケストレーション、どのエージェントを使うか |
 | patterns.md | APIレスポンス、リポジトリパターン |
 | performance.md | モデル選択、コンテキスト管理 |
+| jp-writing.md | 日本語ドキュメント生成時の japanese-tech-writing 適用 |
 
 ---
 
