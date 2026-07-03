@@ -10,7 +10,7 @@
 
 Types: feat, fix, refactor, docs, test, chore, perf, ci
 
-Description: 日本語で記載。
+Description: 日本語で記載。ユーザーの確認をとり、修正機会を与えること。
 
 Optional Body: 日本語で記載し、一文程度の箇条書き最大５点以内で重要なものを優先とする。
 
@@ -21,9 +21,15 @@ Note: Attribution disabled globally via ~/.claude/settings.json.
 PRを作成する際:
 1. 完全なコミット履歴を分析（最新のコミットだけでなく）
 2. `git diff [base-branch]...HEAD`を使用して全ての変更を確認
-3. 包括的なPR概要を下書き
+3. 包括的なPR概要を下書き。タイトルはユーザーの確認をとり、修正機会を与えること
+4. 明確な意図を記載すること。分からない場合はユーザーに確認を取ること。
+5. 意味のある変更点の要約をする
 4. TODOを含むテストプランを含める
 5. 新しいブランチの場合は`-u`フラグでプッシュ
+
+なお、
+- PR本文は500字を超えないこと
+- 文章の記載においてはスキル `japanese-tech-writing`を使用すること
 
 ## Feature Implementation Workflow
 
