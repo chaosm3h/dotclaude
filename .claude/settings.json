@@ -104,5 +104,6 @@
   },
   "effortLevel": "high",
   "editorMode": "normal",
-  "autoCompactEnabled": false
+  "autoCompactEnabled": false,
+  "tui": "fullscreen"
 }
