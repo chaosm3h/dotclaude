@@ -9,3 +9,6 @@
 .claude/skills/cmux
 .claude/skills/cmux-*
 .claude/skills/find-skills
+
+# 自作のcmux関連スキルは追跡する
+!.claude/skills/cmux-diff/
