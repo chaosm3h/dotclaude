@@ -4,3 +4,8 @@
 
 # スキル評価用の作業ディレクトリ(成果物ではない)
 .claude/skills/*-workspace/
+
+# cmuxが各マシンで張る外部スキルへのシンボリックリンク(絶対パスのため環境依存)
+.claude/skills/cmux
+.claude/skills/cmux-*
+.claude/skills/find-skills
