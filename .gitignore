@@ -5,6 +5,9 @@
 # スキル評価用の作業ディレクトリ(成果物ではない)
 .claude/skills/*-workspace/
 
+# 外部ツールが同期するスキル(本リポジトリの定義ではない)
+.claude/skills/synced/
+
 # cmuxが各マシンで張る外部スキルへのシンボリックリンク(絶対パスのため環境依存)
 .claude/skills/cmux
 .claude/skills/cmux-*
