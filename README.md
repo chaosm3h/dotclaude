@@ -32,35 +32,38 @@
 
 | 方法 | 難易度 | 安全性 | 向き不向き             |
 |---|---|---|-------------------|
-| **dotfiles Git repo + symlink** | 中 | ◎ | **メインのベストプラクティス** |
+| **dotfiles Git repo + コピー** | 中 | ◎ | **メインのベストプラクティス** |
 | Dropbox / iCloud + symlink | 低 | △ | 簡易に始めたい場合         |
 | `claude-sync` CLI（OSS）| 低 | ○ | セッション履歴も同期したい場合   |
 | chezmoi / stow | 中〜高 | ◎ | 既存dotfiles管理と統合したい場合 |
 
 ---
 
-## 推奨: dotfiles Git repo + symlink　（本リポジトリ）
+## 推奨: dotfiles Git repo + コピー（本リポジトリ）
 
-Gitリポジトリをコンフィグの単一ソースとして使い、インストールスクリプトで `~/.claude/` 配下にシンリンクを張る方法が実績あるプラクティスです。
+Gitリポジトリをコンフィグの単一ソースとして使い、セットアップスクリプトで任意のリポジトリの `.claude/` 配下に設定をコピーします。
+シンボリックリンクではなくコピーなので、本リポジトリを更新しても反映先には自動で伝わりません。
+更新したら `setup.sh` を再実行します。
 
 ```
 ~/dotclaude/
 └── .claude/
-    ├── settings.json      → symlink: ~/.claude/settings.json
-    ├── CLAUDE.md          → symlink: ~/.claude/CLAUDE.md
-    ├── agents/            → symlink: ~/.claude/agents/
-    ├── skills/            → symlink: ~/.claude/skills/
-    ├── hooks/             → symlink: ~/.claude/hooks/
-    ├── rules/             → symlink: ~/.claude/rules/
-    └── statusline.py      → symlink: ~/.claude/statusline.py
+    ├── agents/            → copy: <反映先>/.claude/agents/
+    ├── skills/            → copy: <反映先>/.claude/skills/
+    ├── hooks/             → copy: <反映先>/.claude/hooks/
+    └── rules/             → copy: <反映先>/.claude/rules/
 ```
 
 ## 使い方
 
 ```zsh
 cd dotclaude
-./setup.sh
+./setup.sh <反映先ディレクトリ>
 ```
+
+指定したディレクトリ(リポジトリ)の `.claude/` に、本リポジトリの設定をコピーします。
+反映先に元からあるファイルは削除せず、同名のファイルだけ上書きします。
+`settings.local.json`、環境依存のシンボリックリンク、`skills/synced/` はコピーしません。
 
 ---
 
