@@ -19,7 +19,7 @@ description: package.jsonとenv.exampleを信頼できる情報源としてdocs/
 2. **信頼できる情報源**:
    - `package.json` の scripts セクション
    - `.env.example`
-3. **生成物**:
+3. **生成物**（ただし存在しない場合は新規作成するかの確認を促すこと）:
    - `docs/CONTRIB.md`:
      - 開発ワークフロー
      - 利用可能なスクリプト (説明テーブル)

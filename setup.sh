@@ -67,3 +67,25 @@ for item in "${ITEMS[@]}"; do
     rsync "${RSYNC_OPTS[@]}" "$DOTFILES/$item" "$TARGET/"
     echo "コピー: $item -> $TARGET/$item"
 done
+
+# ユーザースコープ(~/.claude)へのシンボリックリンク配置
+#   CLAUDE.md / settings.json / statusline.py は、コピーではなくリンクで配置する。
+#   既に何かが存在する場合(通常ファイル・別のリンク・壊れたリンクを含む)は何もしない。
+USER_CLAUDE="$HOME/.claude"
+LINK_ITEMS=("CLAUDE.md" "settings.json" "statusline.py")
+
+mkdir -p "$USER_CLAUDE"
+
+for item in "${LINK_ITEMS[@]}"; do
+    src="$DOTFILES/$item"
+    dest="$USER_CLAUDE/$item"
+
+    if [ ! -e "$src" ]; then
+        echo "スキップ(存在しません): $item" >&2
+    elif [ -e "$dest" ] || [ -L "$dest" ]; then
+        echo "スキップ(既に存在します): $dest"
+    else
+        ln -s "$src" "$dest"
+        echo "リンク: $dest -> $src"
+    fi
+done
